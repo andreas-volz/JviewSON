@@ -22,11 +22,12 @@ var user_theme
 func _ready() -> void:
 	get_viewport().files_dropped.connect(_on_files_dropped)
 		
+	# TODO: this doesn't work. deactivate complete until solution is found
 	# Load the UserTheme (if addon is available)
-	if is_addon_file_present("res://addons/UserTheme/available.txt"):
-		user_theme = UserTheme.new()
-		add_child(user_theme)
-		user_theme.loaded.connect(_on_user_theme_loaded)
+	#if is_addon_file_present("res://addons/UserTheme/available.txt"):
+		#user_theme = UserTheme.new()
+		#add_child(user_theme)
+		#user_theme.loaded.connect(_on_user_theme_loaded)
 		
 	load_json_dialog.add_filter("*.json", "JSON")
 	
@@ -35,12 +36,13 @@ func _ready() -> void:
 		load_json_file(param_file)
 	
 	## TEST: this is only for local development - deactivate before release
-	current_loaded_file = "res://data/test1.json"
-	load_json_file(current_loaded_file)
+	#current_loaded_file = "res://data/test1.json"
+	#load_json_file(current_loaded_file)
 	###################################################################
 	
 func is_addon_file_present(addon_file_path: String) -> bool:
-	return FileAccess.file_exists(addon_file_path)
+	var addon_existing: bool = FileAccess.file_exists(addon_file_path)
+	return addon_existing
 
 	
 func load_json_file(input_file: String, reload: bool = false):
