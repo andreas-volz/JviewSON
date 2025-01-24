@@ -1,0 +1,252 @@
+[gd_scene load_steps=9 format=3 uid="uid://u35860w7guig"]
+
+[ext_resource type="Script" path="res://Application.gd" id="1_h5nr5"]
+[ext_resource type="PackedScene" uid="uid://bcga2u055btkl" path="res://TreeFinderControl.tscn" id="2_cnf7t"]
+[ext_resource type="Script" path="res://TreeFinder.gd" id="2_p15wx"]
+[ext_resource type="Script" path="res://JsonText.gd" id="3_6ual0"]
+
+[sub_resource type="Animation" id="Animation_f6whi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2elgn"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_colors/font_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3aiub"]
+_data = {
+"RESET": SubResource("Animation_f6whi"),
+"blink": SubResource("Animation_2elgn")
+}
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_n2abq"]
+
+[node name="Application" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h5nr5")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="VBoxContainer/MenuContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MenuContainer/MenuBar"]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 31.0
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/MenuContainer/MenuBar/HBoxContainer"]
+layout_mode = 2
+text = "Test123"
+switch_on_hover = true
+item_count = 2
+popup/item_0/text = "1"
+popup/item_1/text = "2"
+popup/item_1/id = 1
+
+[node name="MenuButton2" type="MenuButton" parent="VBoxContainer/MenuContainer/MenuBar/HBoxContainer"]
+layout_mode = 2
+text = "456"
+switch_on_hover = true
+item_count = 2
+popup/item_0/text = "4"
+popup/item_1/text = "5"
+popup/item_1/id = 1
+
+[node name="MenuBar2" type="MenuBar" parent="VBoxContainer/MenuContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/MenuContainer/MenuBar2"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "456"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ExpandAllButton" type="Button" parent="VBoxContainer/MarginContainer/ButtonContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Expand All"
+
+[node name="CollapseAllButton" type="Button" parent="VBoxContainer/MarginContainer/ButtonContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Collape All"
+
+[node name="LoadJSONButton" type="Button" parent="VBoxContainer/MarginContainer/ButtonContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Load JSON"
+
+[node name="AutoReloadCheck" type="CheckBox" parent="VBoxContainer/MarginContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+button_pressed = true
+text = "Auto Reload"
+
+[node name="ReloadButton" type="Button" parent="VBoxContainer/MarginContainer/ButtonContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Reload needed"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/MarginContainer/ButtonContainer/ReloadButton"]
+libraries = {
+"": SubResource("AnimationLibrary_3aiub")
+}
+
+[node name="TreeFinderControl" parent="VBoxContainer/MarginContainer/ButtonContainer" node_paths=PackedStringArray("tree_finder") instance=ExtResource("2_cnf7t")]
+layout_mode = 2
+size_flags_horizontal = 3
+tree_finder = NodePath("../../../TabContainer/Tree/JSONContainer/JSONTree")
+ignore_case = true
+show_ignore_case = true
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Tree" type="TabBar" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="JSONContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Tree"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="JSONTree" type="Tree" parent="VBoxContainer/TabContainer/Tree/JSONContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/inner_item_margin_left = 3
+allow_rmb_select = true
+script = ExtResource("2_p15wx")
+
+[node name="TreePopup" type="PopupMenu" parent="VBoxContainer/TabContainer/Tree/JSONContainer/JSONTree"]
+title = "123"
+item_count = 2
+item_0/text = "1"
+item_1/text = "2"
+item_1/id = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TabContainer/Tree/JSONContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Tree/JSONContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="JSONProperties" type="Tree" parent="VBoxContainer/TabContainer/Tree/JSONContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+column_titles_visible = true
+
+[node name="Text" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="JSONText" type="TextEdit" parent="VBoxContainer/TabContainer/Text"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+editable = false
+minimap_draw = true
+syntax_highlighter = SubResource("CodeHighlighter_n2abq")
+highlight_all_occurrences = true
+highlight_current_line = true
+script = ExtResource("3_6ual0")
+
+[node name="LoadJSONDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Open a File"
+initial_position = 2
+size = Vector2i(303, 180)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[node name="ModifiedCheckTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/ButtonContainer/ExpandAllButton" to="." method="_on_expand_all_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/ButtonContainer/CollapseAllButton" to="." method="_on_collapse_all_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/ButtonContainer/LoadJSONButton" to="." method="_on_load_json_button_pressed"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer/ButtonContainer/AutoReloadCheck" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/ButtonContainer/ReloadButton" to="." method="_on_reload_button_pressed"]
+[connection signal="item_mouse_selected" from="VBoxContainer/TabContainer/Tree/JSONContainer/JSONTree" to="VBoxContainer/TabContainer/Tree/JSONContainer/JSONTree" method="_on_item_mouse_selected"]
+[connection signal="file_selected" from="LoadJSONDialog" to="." method="_on_load_json_dialog_file_selected"]
+[connection signal="timeout" from="ModifiedCheckTimer" to="." method="_on_modified_check_timer_timeout"]

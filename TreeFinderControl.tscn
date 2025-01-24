@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcga2u055btkl"]
+
+[ext_resource type="Script" path="res://TreeFinderControl.gd" id="1_a43ta"]
+[ext_resource type="Texture2D" uid="uid://ddj5n12rqgvan" path="res://Assets/ui/MoveUp.svg" id="2_qp44g"]
+[ext_resource type="Texture2D" uid="uid://j8b27eq7e4am" path="res://Assets/ui/MoveDown.svg" id="3_ex775"]
+
+[node name="TreeFinderControl" type="HBoxContainer"]
+script = ExtResource("1_a43ta")
+
+[node name="IgnoreCase" type="CheckBox" parent="."]
+visible = false
+layout_mode = 2
+text = "Ignore Case"
+
+[node name="SearchInput" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="FoundItems" type="Label" parent="."]
+layout_mode = 2
+
+[node name="SearchPrev" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("2_qp44g")
+
+[node name="SearchNext" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("3_ex775")
