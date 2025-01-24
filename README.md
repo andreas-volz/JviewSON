@@ -45,7 +45,7 @@ JviewSON is perfect for developers, data analysts, and anyone working with JSON 
 5. JviewSON auto-updates the display when your JSON file changes (optional).
 
 ## Screenshots
-
+![JviewSON_screenhot](https://github.com/user-attachments/assets/6548e446-f780-4a14-a263-d6160cb9b0e6)
 
 
 ## Contributing
