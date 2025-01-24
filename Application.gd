@@ -9,6 +9,7 @@ const ICON_DICTIONARY_COLOR = Color.YELLOW
 @onready var load_json_dialog: FileDialog = %LoadJSONDialog
 @onready var auto_reload_check: CheckBox = %AutoReloadCheck
 @onready var json_text: TextEdit = %JSONText
+@onready var reload_button: Button = %ReloadButton
 
 var tree_root: TreeItem
 var modified_time: int
@@ -26,6 +27,12 @@ func _ready() -> void:
 		#add_child(user_theme)
 		#user_theme.loaded.connect(_on_user_theme_loaded)
 		
+	# on HTML platform disable reload feature
+	if is_platform_html():
+		auto_reload_check.visible = false
+		auto_reload_check.button_pressed = false
+		reload_button.visible = false
+		
 	load_json_dialog.add_filter("*.json", "JSON")
 	
 	var param_file = get_file_parameter()
@@ -36,6 +43,15 @@ func _ready() -> void:
 	#current_loaded_file = "res://data/test1.json"
 	#load_json_file(current_loaded_file)
 	###################################################################
+	
+func is_platform_html() -> bool:
+	# Check all possible web platform tags
+	var web_tags = ["web_android", "web_ios", "web_linuxbsd", "web_macos", "web_windows"]
+	for tag in web_tags:
+		if OS.has_feature(tag):
+			return true
+	
+	return false
 	
 func is_addon_file_present(addon_file_path: String) -> bool:
 	var addon_existing: bool = FileAccess.file_exists(addon_file_path)
