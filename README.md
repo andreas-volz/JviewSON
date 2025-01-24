@@ -34,7 +34,7 @@ JviewSON is perfect for developers, data analysts, and anyone working with JSON 
    ```
 2. Open the project in **Godot 4**.
 3. Run the project to start using JviewSON.
-4. Alternative use the latest GitHub release
+4. Alternative use the latest GitHub or [itch.io](https://pocdev.itch.io/jviewson) release
 
 ## How to Use
 
