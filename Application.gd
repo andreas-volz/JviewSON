@@ -9,9 +9,6 @@ const ICON_DICTIONARY_COLOR = Color.YELLOW
 @onready var load_json_dialog: FileDialog = %LoadJSONDialog
 @onready var auto_reload_check: CheckBox = %AutoReloadCheck
 @onready var json_text: TextEdit = %JSONText
-@onready var search_input: LineEdit = %SearchInput
-@onready var found_items: Label = %FoundItems
-@onready var ignore_case: CheckBox = %IgnoreCase
 
 var tree_root: TreeItem
 var modified_time: int
