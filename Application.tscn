@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://u35860w7guig"]
 
-[ext_resource type="Script" path="res://Application.gd" id="1_h5nr5"]
+[ext_resource type="Script" uid="uid://5ixekkvwr8r5" path="res://Application.gd" id="1_h5nr5"]
 [ext_resource type="PackedScene" uid="uid://bcga2u055btkl" path="res://TreeFinderControl.tscn" id="2_cnf7t"]
-[ext_resource type="Script" path="res://TreeFinder.gd" id="2_p15wx"]
-[ext_resource type="Script" path="res://JsonText.gd" id="3_6ual0"]
+[ext_resource type="Script" uid="uid://xq12vv505hej" path="res://TreeFinder.gd" id="2_p15wx"]
+[ext_resource type="Script" uid="uid://cejegn1tyf188" path="res://JsonText.gd" id="3_6ual0"]
 
 [sub_resource type="Animation" id="Animation_f6whi"]
 length = 0.001
@@ -38,8 +38,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3aiub"]
 _data = {
-"RESET": SubResource("Animation_f6whi"),
-"blink": SubResource("Animation_2elgn")
+&"RESET": SubResource("Animation_f6whi"),
+&"blink": SubResource("Animation_2elgn")
 }
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_n2abq"]
@@ -92,6 +92,7 @@ text = "Test123"
 switch_on_hover = true
 item_count = 2
 popup/item_0/text = "1"
+popup/item_0/id = 0
 popup/item_1/text = "2"
 popup/item_1/id = 1
 
@@ -101,6 +102,7 @@ text = "456"
 switch_on_hover = true
 item_count = 2
 popup/item_0/text = "4"
+popup/item_0/id = 0
 popup/item_1/text = "5"
 popup/item_1/id = 1
 
@@ -152,7 +154,7 @@ text = "Reload needed"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/MarginContainer/ButtonContainer/ReloadButton"]
 libraries = {
-"": SubResource("AnimationLibrary_3aiub")
+&"": SubResource("AnimationLibrary_3aiub")
 }
 
 [node name="TreeFinderControl" parent="VBoxContainer/MarginContainer/ButtonContainer" node_paths=PackedStringArray("tree_finder") instance=ExtResource("2_cnf7t")]
@@ -193,6 +195,7 @@ script = ExtResource("2_p15wx")
 title = "123"
 item_count = 2
 item_0/text = "1"
+item_0/id = 0
 item_1/text = "2"
 item_1/id = 1
 
@@ -234,7 +237,7 @@ script = ExtResource("3_6ual0")
 unique_name_in_owner = true
 title = "Open a File"
 initial_position = 2
-size = Vector2i(303, 180)
+size = Vector2i(1201, 180)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
