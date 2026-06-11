@@ -8,3 +8,8 @@ func _ready() -> void:
 
 func set_unformated_text(unformated_text: String):
 	text = unformated_text
+
+# TODO: implement Ctrl-C
+func _copy(caret_index: int) -> void:
+	var selected_text : String = get_selected_text()
+	DisplayServer.clipboard_set(selected_text)
